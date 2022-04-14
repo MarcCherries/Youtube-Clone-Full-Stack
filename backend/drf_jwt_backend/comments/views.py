@@ -6,9 +6,15 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Comment, Reply
 from .serializer import CommentSerializer, ReplySerializer
 
-@permission_classes([AllowAny])
+
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def get_all_comments (request):
-    comments = Comment.objects.all()
-    serializer = CommentSerializer(comments, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    if request.method == 'GET':
+        #video_params = request.query_params.get('video_id')
+        comments = Comment.objects.all()
+        #comments = comments.filter(video_id=video_params)
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+
