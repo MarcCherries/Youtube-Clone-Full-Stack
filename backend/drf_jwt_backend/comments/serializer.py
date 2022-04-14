@@ -18,3 +18,11 @@ class ReplySerializer(serializers.ModelSerializer):
         model= Reply
         fields = ['id', 'user', 'comment','text']
         depth = 1
+
+class NewCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'user','video_id', 'text']        
+
+    user = serializers.IntegerField(write_only = True)  
+       

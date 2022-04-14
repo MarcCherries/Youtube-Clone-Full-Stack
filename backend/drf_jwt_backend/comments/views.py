@@ -4,8 +4,10 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import Comment, Reply
-from .serializer import CommentSerializer, ReplySerializer, VideoCommentSerializer
+from .serializer import CommentSerializer, ReplySerializer, VideoCommentSerializer, NewCommentSerializer
 from rest_framework import status
+
+
 
 
 
@@ -24,4 +26,13 @@ def get_all_comments (request):
             return Response(serializer.data, status=status.HTTP_200_OK)
  
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_new_comment(request):
+  if request.method == 'POST':
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save(user=request.user)
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
