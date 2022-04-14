@@ -39,12 +39,20 @@ def add_new_comment(request):
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['PUT'])
-# @permission_classes([AllowAny])
+@api_view(['PUT', 'GET'])
+@permission_classes([IsAuthenticated])
 def update_comment_by_id(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
     if request.method == 'PUT':
-        comment = get_object_or_404(Comment, pk=pk)
         serializer = CommentSerializer(comment, data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+        serializer.save(user=request.user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'GET':
+            replies = Reply.objects.all()
+            finalReplies= replies.filter(comment_id=comment.id)
+            serializer = ReplySerializer(finalReplies, many=True)
+            return Response (serializer.data, status=status.HTTP_200_OK)
+
+       
+
