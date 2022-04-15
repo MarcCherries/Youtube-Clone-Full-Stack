@@ -22,7 +22,7 @@ def get_all_comments (request):
         comments = Comment.objects.all()
         if video_params:
             comments = comments.filter(video_id=video_params)
-            serializer = VideoCommentSerializer(comments, many=True)
+            serializer = CommentSerializer(comments, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else: 
             serializer = CommentSerializer(comments, many=True)
