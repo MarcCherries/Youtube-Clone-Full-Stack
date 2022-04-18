@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import {Link} from 'react-router-dom'
 
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
@@ -10,57 +11,114 @@ const HomePage = () => {
   const [user, token] = useAuth();
   const [searchItem, setSearchItem] = useState()
   const [videoData, setVideoData] = useState({
-    "kind": "youtube#searchListResponse",
-    "etag": "eaCOzyVN0arwnWgwpKqs6OY4O9Q",
-    "nextPageToken": "CAUQAA",
-    "regionCode": "US",
-    "pageInfo": {
-        "totalResults": 1000000,
-        "resultsPerPage": 5
-    },
     "items": [
         {
-            "kind": "youtube#searchResult",
-            "etag": "krZhLtdi_x6JALjr9y0F6Fsbp-E",
+           
             "id": {
                 "kind": "youtube#video",
-                "videoId": "YQHsXMglC9A"
+                "videoId": "wTGfg8Dy8ak"
+            },
+            "snippet": {
+                
+          
+                "title": "Verso la fine dei lavori di camperizzazione 🚐 Zona giorno con unboxing",
+                "description": "Episodio 17: Siamo in Spagna per effettuare dei test di fine lavori e per capire cosa si può migliorare su Nirvan 2.0.",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/wTGfg8Dy8ak/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    }
+                },
+             
             }
         },
         {
-            "kind": "youtube#searchResult",
-            "etag": "RDbKrp81fOmD8r9it_jdwX-HuVo",
+        
             "id": {
                 "kind": "youtube#video",
-                "videoId": "mHONNcZbwDY"
+                "videoId": "d9iLPs1Tjkc"
+            },
+            "snippet": {
+                "title": "Nirvana Best Best Songs - Nirvana Greatest Hits Full Album",
+                "description": "Nirvana Best Best Songs - Nirvana Greatest Hits Full Album.",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/d9iLPs1Tjkc/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+               
+                },
+             
             }
         },
         {
-            "kind": "youtube#searchResult",
-            "etag": "24_6pWZQYFbEO5vc42J98MpFbNw",
+  
             "id": {
                 "kind": "youtube#video",
-                "videoId": "be12BC5pQLE"
+                "videoId": "hTWKbfoikeg"
+            },
+            "snippet": {
+                "title": "Nirvana - Smells Like Teen Spirit (Official Music Video)",
+                "description": "Official Music Video for Smells Like Teen Spirit performed by Nirvana. Nevermind (30th Anniversary Edition) is available now: ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/hTWKbfoikeg/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+           
+                },
+                
             }
         },
         {
-            "kind": "youtube#searchResult",
-            "etag": "-vkKMXvyCi-E_bCCHp7XDDRCiqY",
+           
             "id": {
                 "kind": "youtube#video",
-                "videoId": "fazMSCZg-mw"
+                "videoId": "fregObNcHC8"
+            },
+            "snippet": {
+                "title": "Nirvana - The Man Who Sold The World (MTV Unplugged)",
+                "description": "REMASTERED IN HD! Taken from the 25th Anniversary Editions of Nirvana – MTV Unplugged in New York Order Now: ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/fregObNcHC8/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+            
+                },
+            
             }
         },
         {
-            "kind": "youtube#searchResult",
-            "etag": "xopNDBszt3HNeW5-6fIpleYJaXk",
+     
             "id": {
                 "kind": "youtube#video",
-                "videoId": "8wWxejCosj4"
+                "videoId": "vabnZ9-ex7o"
+            },
+            "snippet": {
+      
+              
+                "title": "Nirvana - Come As You Are (Official Music Video)",
+                "description": "REMASTERED IN HD!! Official Music Video for Come As You Are performed by Nirvana. 'Nevermind (30th Anniversary Edition)' is ...",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://i.ytimg.com/vi/vabnZ9-ex7o/default.jpg",
+                        "width": 120,
+                        "height": 90
+                    },
+          
+                },
+         
+              
             }
         }
     ]
-});
+}
+  );
 
   // useEffect(() => {
   //   const fetchCars = async () => {
@@ -116,10 +174,11 @@ const HomePage = () => {
 SEARCH
         </button>
       </form>
-      <iframe width='500' height='350' src={`https://www.youtube.com/embed/${videoData.items[0].id.videoId}`}></iframe>
-      <iframe width='500' height='350' src={`https://www.youtube.com/embed/${videoData.items[1].id.videoId}`}></iframe>
-      <iframe width='500' height='350' src={`https://www.youtube.com/embed/${videoData.items[2].id.videoId}`}></iframe>
-      <iframe width='500' height='350' src={`https://www.youtube.com/embed/${videoData.items[3].id.videoId}`}></iframe>
+      <Link to={`/VideoPage/${videoData.items[0].id.videoId}`}><img src={videoData.items[0].snippet.thumbnails.default.url}></img> </Link>
+      <Link to={`/VideoPage/${videoData.items[1].id.videoId}`}><img src={videoData.items[1].snippet.thumbnails.default.url}></img> </Link>
+      <Link to={`/VideoPage/${videoData.items[2].id.videoId}`}><img src={videoData.items[2].snippet.thumbnails.default.url}></img> </Link>
+      <Link to={`/VideoPage/${videoData.items[3].id.videoId}`}><img src={videoData.items[3].snippet.thumbnails.default.url}></img> </Link>
+      
     </div>
   );
 };
