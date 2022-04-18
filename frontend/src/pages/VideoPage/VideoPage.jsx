@@ -3,12 +3,15 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import AddCommentModal from "../../components/AddComentModal/AddCommentModal";
+import DisplayComments from "../../components/DisplayComments/DisplayComments";
 
 
 const VideoPage = (props) => {
 const [user, token] = useAuth();
 
 const {video} = useParams()
+const [modal, setModal] = useState(false)
 const [sim, setSim] = useState({
     "items": [
         {
@@ -108,12 +111,17 @@ useEffect(() => {
 console.log(sim)
 
 
+
+
+
     return ( 
 
 <div className='video-page-container'>
     <div className='video-comment-container'>
    
     <iframe width='525' height='450'src={`https://www.youtube.com/embed/${video}`}></iframe>
+    <DisplayComments />
+
    
     
     </div>
@@ -127,7 +135,7 @@ console.log(sim)
     </div>
     </Link>
    
-    <Link to={`/VideoPage/${sim.items[1].id.videoId}`}>
+    <Link to={`/VideoPage/${sim.items[3].id.videoId}`}>
     <div className="thumbnail-card">
     <p>{sim.items[1].snippet.title}</p>
     <img className="thumbnail" width='75' height='50' alt="thumbnail failed to load"src={`${sim.items[3].snippet.thumbnails.default.url}`}></img>
@@ -150,6 +158,11 @@ console.log(sim)
     </div>
     </Link>
     
+    {/* {value && <h1>hello</h1>}
+    {!value && <h1>goodbye</h1>}
+
+    {value ? <h1>value is false</h1> : <h1>value is true</h1>} */}
+
     </div>
  
 
