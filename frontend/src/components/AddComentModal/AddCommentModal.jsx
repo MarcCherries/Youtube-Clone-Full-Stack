@@ -14,13 +14,16 @@ let initialValues = {
 const AddCommentModal = (props) => {
   //   const [comments, setComments] = useState([]);
   const [user, token] = useAuth();
+ 
   const [formData, handleInputChange, handleSubmit] = useCustomForm(
     initialValues,
     postNewComment
   );
 
-  formData.video_id = props.video;
+  
 
+
+  formData.video_id=props.video;
   async function postNewComment() {
     try {
       let response = await axios.post(
@@ -34,8 +37,10 @@ const AddCommentModal = (props) => {
       );
     } catch (error) {
       console.log(error.message);
+
     }
   }
+  console.log(props.video)
   if (!props.modal) {
     return null;
   }
