@@ -100,6 +100,7 @@ const VideoPage = (props) => {
   }, [video]);
 
   console.log(sim);
+  console.log(modal)
 
   
 
@@ -114,12 +115,15 @@ const VideoPage = (props) => {
           height="450"
           src={`https://www.youtube.com/embed/${video}`}
         ></iframe>
-        <DisplayComments video={video} />
+      
       </div>
 
 
       <div className="thumbnail-container">
-        <DisplayThumbnails videoData={sim}/>
+      <DisplayComments video={video} modal={modal} onClose={() =>setModal(false)}/>
+      
+      <button  onClick={() => setModal(true)}>Reply</button>
+        
         {/* <Link to={`/VideoPage/${sim.items[4].id.videoId}`}>
           <div className="thumbnail-card">
           {sim.items[4].snippet &&

@@ -14,12 +14,14 @@ let initialValues = {
 const AddCommentModal = (props) => {
   //   const [comments, setComments] = useState([]);
   const [user, token] = useAuth();
+  const [comments, setComments] = useState()
  
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     initialValues,
     postNewComment
   );
-
+ 
+  console.log(props.modal)
   formData.video_id=props.video;
 
 
@@ -33,8 +35,11 @@ const AddCommentModal = (props) => {
           headers: {
             Authorization: "Bearer " + token,
           },
+         
         }
+       
       );
+      setComments(response.data)
     } catch (error) {
       console.log(error.message);
 
@@ -44,6 +49,9 @@ const AddCommentModal = (props) => {
   if (!props.modal) {
     return null;
   }
+  
+ 
+  console.log(props.modal)
 
  
   return (
@@ -59,7 +67,7 @@ const AddCommentModal = (props) => {
             onChange={handleInputChange}
          
           ></input>
-          <button type="submit" >Submit</button>
+          <button type="submit"  onClick={props.onClose}>Submit</button>
 
           <span className="close" onClick={props.onClose}>
             &times;
