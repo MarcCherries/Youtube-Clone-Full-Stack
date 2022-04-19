@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import VideoCard from "../../components/VideoCard/VideoCard";
-import DisplayThumbnails from "../../components/DisplayVideos/DisplayThumbnails";
+import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
 import VideoPage from "../VideoPage/VideoPage";
 
 const HomePage = () => {
@@ -142,6 +142,10 @@ console.log(defaultData)
 console.log(videoData)
 
   return (
+<div>
+    
+
+
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
       <form className="searchForm" onSubmit={handleSubmit}>
@@ -152,9 +156,13 @@ console.log(videoData)
 SEARCH
         </button>
       </form>
-
-      <DisplayThumbnails videoData={videoData} defaultData={defaultData}/>
+      <div >
+        <VideoCard videoData={videoData} defaultData={defaultData}/>
+      </div>
       
+      {/* <DisplayThumbnails videoData={videoData} defaultData={defaultData}/> */}
+      
+    </div>
     </div>
   );
 };

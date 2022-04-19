@@ -5,22 +5,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AddCommentModal from "../../components/AddComentModal/AddCommentModal";
 import DisplayComments from "../../components/DisplayComments/DisplayComments";
-import './VideoPage.css'
-import DisplayThumbnails from "../../components/DisplayVideos/DisplayThumbnails";
-
-
-
-
+import "./VideoPage.css";
+import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
 
 const VideoPage = (props) => {
-   
   const [user, token] = useAuth();
 
   const { video } = useParams();
   const [modal, setModal] = useState(false);
   const [sim, setSim] = useState({
     items: [
- 
       {
         id: {
           videoId: "oKU1HXMZYm4",
@@ -76,22 +70,16 @@ const VideoPage = (props) => {
       },
     ],
   });
-  
-
 
   useEffect(() => {
-      
     const fetchSim = async () => {
-
-    
       try {
         let response = await axios.get(
           `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${video}&type=video&maxResults=10&key=AIzaSyCWD4yq3V_9fOG5aC1W003_FWvbjPrKkW0&part=snippet`
         );
-       
+
         console.log(response.data);
         setSim(response.data);
-        
       } catch (error) {
         console.log(error.message);
       }
@@ -100,11 +88,6 @@ const VideoPage = (props) => {
   }, [video]);
 
   console.log(sim);
-
-  
-
-
-  
 
   return (
     <div className="video-page-container">
@@ -117,9 +100,8 @@ const VideoPage = (props) => {
         <DisplayComments video={video} />
       </div>
 
-
       <div className="thumbnail-container">
-        <DisplayThumbnails videoData={sim}/>
+        <DisplayThumbnails videoData={sim} />
         {/* <Link to={`/VideoPage/${sim.items[4].id.videoId}`}>
           <div className="thumbnail-card">
           {sim.items[4].snippet &&
@@ -170,14 +152,14 @@ const VideoPage = (props) => {
 export default VideoPage;
 
 //const fixSim = ()=>{
-     
+
 //     let newResponseData = sim.items.filter(function(el){
 //       if (el.snippet){
 //           return true
 //       }
-      
+
 //     }
-  
+
 //     )
 //     console.log(newResponseData)
 //     setSim(newResponseData)

@@ -1,21 +1,46 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { button, Breadcrumb, card, Card } from "react-bootstrap";
-import { Button } from "bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const VideoCard = () => {
+const VideoCard = (props) => {
+  console.log(props.defaultData);
+
   return (
     <div>
-      <Card className="mb-3" style={{ color: "#000" }}>
-        <Card.Img src="https://images.news18.com/ibnlive/uploads/2022/01/youtube-logo-164319198616x9.jpg" />
-        <Card.Body>
-          <Card.Title>Insert Title Logic Here</Card.Title>
-          <Card.Text>Insert Comment Logic Here</Card.Text>
-          <Button variant="primary">Comment</Button>
-        </Card.Body>
-      </Card>
+      {props.videoData.items.map((entry, index) => {
+        return (
+          <div
+            className="card"
+            style={{ width: "30%", border: "2px solid black" }}
+          >
+            <Link key={index} to={`/VideoPage/${entry.videoId}`}>
+              <img src={entry.snippet.thumbnails.default.url} />
+            </Link>
+            <div>{entry.snippet.title}</div>
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 export default VideoCard;
+
+//       <div class="card">
+//         <img
+//           class="card-img-top"
+//           src={entry.snippet.thumbnails.default.url}
+//           alt="Card image cap"
+//         />
+//         <div class="card-body">
+//           <h5 class="card-title">{entry.title}</h5>
+//           <p class="card-text">{entry.description}</p>
+//           <a href="#" class="btn btn-primary">
+//             Comment
+//           </a>
+//         </div>
+//       </div>
+//     );
+//   })}
+// </div>
