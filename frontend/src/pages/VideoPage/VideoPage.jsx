@@ -5,31 +5,22 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import AddCommentModal from "../../components/AddComentModal/AddCommentModal";
 import DisplayComments from "../../components/DisplayComments/DisplayComments";
+import './VideoPage.css'
+import DisplayThumbnails from "../../components/DisplayVideos/DisplayThumbnails";
+
+
+
+
 
 const VideoPage = (props) => {
+   
   const [user, token] = useAuth();
 
   const { video } = useParams();
   const [modal, setModal] = useState(false);
   const [sim, setSim] = useState({
     items: [
-      {
-        id: {
-          videoId: "eVTXPUF4Oz4",
-        },
-        snippet: {
-          title: "In The End [Official HD Music Video] - Linkin Park",
-          description:
-            "Watch the official music video for In The End by Linkin Park from the album Hybrid Theory.\nStream: https://apple.co/3lcCvTK\n\n🔔 Subscribe to the channel: https://bit.ly/1EBzxN2\n\nHybrid Theory 20th Anniversary Edition available here: http://lprk.co/ht20\nWatch the lyric video: https://youtu.be/g9j5UzxEhEM\n\nDirected by Joe Hahn and Nathan \"Karma\" Cox.\n\nApple Music: http://lprk.co/apple\nSpotify: http://lprk.co/spotify\nAmazon: http://lprk.co/amazon\n\nFollow Linkin Park:\nWeb: https://www.linkinpark.com/\nOfficial Community: https://LPUnderground.com\nFacebook: http://lprk.co/facebook\nInstagram: http://lprk.co/instagram\nTwitter: http://lprk.co/twitter\nMFR: https://musicforrelief.org\n\nLinkin Park is an alternative rock band renowned for their hits “Numb,” “In the End,” “What I’ve Done,” “Castle of Glass,” “New Divide,” “Crawling,” and “Faint.”  They worked with artists like Jay-Z, Metallica, Steve Aoki, and Paul McCartney — amassing billions of global streams and received the UN Global Leadership Award for their humanitarian work.\n\nLyrics:\nIt starts with one thing\nI don't know why\nIt doesn't even matter how hard you try\nKeep that in mind\nI designed this rhyme\nTo explain in due time\nAll I know\nTime is a valuable thing\nWatch it fly by as the pendulum swings\nWatch it count down to the end of the day\nThe clock ticks life away\n\nIt's so unreal\nDidn't look out below\nWatch the time go right out the window\nTrying to hold on, didn't even know\nI wasted it all just to watch you go\nI kept everything inside\nAnd even though I tried, it all fell apart\nWhat it meant to me\n\nWill eventually be a memory of a time when\nI tried so hard\nAnd got so far\nBut in the end\nIt doesn't even matter\nI had to fall\nTo lose it all\nBut in the end\nIt doesn't even matter\n\nOne thing, I don't know why\nIt doesn't even matter how hard you try\nKeep that in mind\nI designed this rhyme\nTo remind myself how\nI tried so hard\nIn spite of the way you were mocking me\nActing like I was part of your property\nRemembering all the times you fought with me\nI'm surprised it got so\nThings aren't the way they were before\nYou wouldn't even recognize me anymore\nNot that you knew me back then\nBut it all comes back to me in the end\nYou kept everything inside\nAnd even though I tried, it all fell apart\nWhat it meant to me will eventually be a memory of a time when\n\nI tried so hard\nAnd got so far\nBut in the end\nIt doesn't even matter\nI had to fall\nTo lose it all\nBut in the end\nIt doesn't even matter\n\nI've put my trust in you\nPushed as far as I can go\nFor all this\nThere's only one thing you should know\nI've put my trust in you\nPushed as far as I can go\nFor all this\nThere's only one thing you should know\n\nI tried so hard\nAnd got so far\nBut in the end\nIt doesn't even matter\nI had to fall\nTo lose it all\nBut in the end\nIt doesn't even matter\n\n#OfficialMusicVideo #LinkinPark #InTheEnd #WeAreWarnerRecords",
-          thumbnails: {
-            default: {
-              url: "https://i.ytimg.com/vi/eVTXPUF4Oz4/default.jpg",
-              width: 120,
-              height: 90,
-            },
-          },
-        },
-      },
+ 
       {
         id: {
           videoId: "oKU1HXMZYm4",
@@ -85,23 +76,35 @@ const VideoPage = (props) => {
       },
     ],
   });
+  
+
 
   useEffect(() => {
+      
     const fetchSim = async () => {
+
+    
       try {
         let response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${video}&type=video&key=AIzaSyAzGb_xlRzCVq7xVJZ0gmRSfzrhFxLq4HA&part=snippet`
+          `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${video}&type=video&maxResults=10&key=AIzaSyCWD4yq3V_9fOG5aC1W003_FWvbjPrKkW0&part=snippet`
         );
-
+       
         console.log(response.data);
         setSim(response.data);
+        
       } catch (error) {
         console.log(error.message);
       }
     };
     fetchSim();
   }, [video]);
+
   console.log(sim);
+
+  
+
+
+  
 
   return (
     <div className="video-page-container">
@@ -114,69 +117,71 @@ const VideoPage = (props) => {
         <DisplayComments video={video} />
       </div>
 
+
       <div className="thumbnail-container">
-        <Link to={`/VideoPage/${sim.items[0].id.videoId}`}>
+        <DisplayThumbnails videoData={sim}/>
+        {/* <Link to={`/VideoPage/${sim.items[4].id.videoId}`}>
           <div className="thumbnail-card">
-            <p>{sim.items[0].snippet.title}</p>
+          {sim.items[4].snippet &&
             <img
               className="thumbnail"
               width="75"
               height="50"
               alt="thumbnail failed to load"
-              src={`${sim.items[0].snippet.thumbnails.default.url}`}
-            ></img>
+              src={`${sim.items[4].snippet.thumbnails.default.url}`}
+            ></img>}
+                 {!sim.items[4].snippet &&
+              <img
+              className="thumbnail"
+              width="75"
+              height="50"
+              alt="thumbnail failed to load"
+              src='https://i.ytimg.com/vi/eVTXPUF4Oz4/default.jpg'
+              ></img>}
           </div>
         </Link>
-
-        <Link to={`/VideoPage/${sim.items[3].id.videoId}`}>
+        <Link to={`/VideoPage/${sim.items[5].id.videoId}`}>
           <div className="thumbnail-card">
-            <p>{sim.items[1].snippet.title}</p>
+          {sim.items[5].snippet &&
             <img
               className="thumbnail"
               width="75"
               height="50"
               alt="thumbnail failed to load"
-              src={`${sim.items[3].snippet.thumbnails.default.url}`}
-            ></img>
-          </div>
-        </Link>
-
-        <Link to={`/VideoPage/${sim.items[2].id.videoId}`}>
-          <div className="thumbnail-card">
-            <p>{sim.items[1].snippet.title}</p>
-            <img
+              src={`${sim.items[5].snippet.thumbnails.default.url}`}
+            ></img>}
+                 {!sim.items[5].snippet &&
+              <img
               className="thumbnail"
               width="75"
               height="50"
               alt="thumbnail failed to load"
-              src={`${sim.items[1].snippet.thumbnails.default.url}`}
-            ></img>
+              src='https://i.ytimg.com/vi/eVTXPUF4Oz4/default.jpg'
+              ></img>}
           </div>
         </Link>
 
-        <Link to={`/VideoPage/${sim.items[3].id.videoId}`}>
-          <div className="thumbnail-card">
-            <p>{sim.items[1].snippet.title}</p>
-            <img
-              className="thumbnail"
-              width="75"
-              height="50"
-              alt="thumbnail failed to load"
-              src={`${sim.items[3].snippet.thumbnails.default.url}`}
-            ></img>
-          </div>
-        </Link>
-
-        {/* {value && <h1>hello</h1>}
-    {!value && <h1>goodbye</h1>}
-
-    {value ? <h1>value is false</h1> : <h1>value is true</h1>} */}
+       */}
       </div>
     </div>
   );
 };
 
 export default VideoPage;
+
+//const fixSim = ()=>{
+     
+//     let newResponseData = sim.items.filter(function(el){
+//       if (el.snippet){
+//           return true
+//       }
+      
+//     }
+  
+//     )
+//     console.log(newResponseData)
+//     setSim(newResponseData)
+//   }
 
 // useEffect(() => {
 //     const fetchComments = async () => {
