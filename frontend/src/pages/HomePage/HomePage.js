@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import VideoCard from "../../components/VideoCard/VideoCard";
 import DisplayThumbnails from "../../components/DisplayVideos/DisplayThumbnails";
 import VideoPage from "../VideoPage/VideoPage";
 
