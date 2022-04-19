@@ -4,8 +4,8 @@ import AddCommentModal from '../AddComentModal/AddCommentModal';
 
 const DisplayComments = (props) => {
     const [modal, setModal] = useState(false);
-   let video = props.video
-    console.log(props.video)
+    const video = props.video
+
     return ( 
 
         <div>
