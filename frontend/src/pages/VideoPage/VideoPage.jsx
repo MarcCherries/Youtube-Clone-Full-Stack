@@ -8,6 +8,7 @@ import DisplayComments from "../../components/DisplayComments/DisplayComments";
 import "./VideoPage.css";
 import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
 import VideoCard from "../../components/VideoCard/VideoCard";
+import DisplayReplies from "../../components/DisplayReplies/DisplayReplies";
 
 const VideoPage = (props) => {
   const [user, token] = useAuth();
@@ -100,11 +101,14 @@ const VideoPage = (props) => {
           height="450"
           src={`https://www.youtube.com/embed/${video}`}
         ></iframe>
+
         <DisplayComments
           video={video}
           comments={comments}
           setComments={setComments}
         />
+
+        <DisplayReplies />
       </div>
       <div>
         <VideoCard videoData={sim} />

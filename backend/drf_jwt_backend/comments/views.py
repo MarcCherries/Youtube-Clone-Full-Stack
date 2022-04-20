@@ -60,5 +60,12 @@ def update_comment_by_id(request, pk):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_all_replies(request):
+        replies = Reply.objects.all()
+        serializer = ReplySerializer(replies, many=True)
+        return Response (serializer.data, status=status.HTTP_200_OK)
+
 
 

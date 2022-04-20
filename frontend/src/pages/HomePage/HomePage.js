@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import VideoCard from "../../components/VideoCard/VideoCard";
 import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
 import VideoPage from "../VideoPage/VideoPage";
+import DisplayReplies from "../../components/DisplayReplies/DisplayReplies";
 
 const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -152,7 +153,7 @@ SEARCH
     <div>
     <VideoCard handleSearch={props.handleSearch} setSearchItem={props.setSearchItem} videoData={props.videoData} defaultData={props.defaultData}/>
         
-   
+   <DisplayReplies />
       
      
       </div>

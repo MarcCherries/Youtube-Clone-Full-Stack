@@ -31,7 +31,7 @@ const AddCommentModal = (props) => {
         {
           headers: {
             Authorization: "Bearer " + token,
-          },
+          }
         }
       );
       setComments(response.data);
