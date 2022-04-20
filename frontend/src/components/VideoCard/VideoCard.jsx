@@ -12,7 +12,7 @@ const VideoCard = (props) => {
       {props.videoData.items.map((entry, index) => {
         return (
           <div
-            className="card"
+            className="card-color"
             style={{ width: "30%", border: "2px solid black" }}
           >{entry.snippet &&
             <Link  to={`/VideoPage/${entry.id.videoId}`}>

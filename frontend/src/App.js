@@ -14,6 +14,7 @@ import VideoPage from "./pages/VideoPage/VideoPage";
 import Navbar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 
+
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import useAuth
@@ -151,8 +152,15 @@ console.log(defaultData)
 console.log(videoData)
 
   return (
-    <div>
+    
+      
+    
+    <div className="background-image">
+      
       <Navbar />
+      
+  
+
       <Routes>
         <Route
           path="/"
@@ -162,12 +170,15 @@ console.log(videoData)
             </PrivateRoute>
           }
         />
+
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/VideoPage/:video/" element={<PrivateRoute><VideoPage videoData={videoData} defaultData={defaultData}  /></PrivateRoute>} />
 
       </Routes>
+      
       <Footer />
+      
     </div>
   );
 }

@@ -40,14 +40,12 @@ const AddCommentModal = (props) => {
     }
   }
 
-
   return (
     <div className="modal">
       <div className="modal-window">
         <form className="form" onSubmit={handleSubmit}>
-          <label>COMMENT </label>
-
           <input
+            placeholder="ADD COMMENT"
             type="text"
             name="text"
             value={formData.text}
@@ -55,9 +53,7 @@ const AddCommentModal = (props) => {
           ></input>
           <button type="submit">Submit</button>
 
-          <span className="close" >
-            &times;
-          </span>
+          <span className="close">&times;</span>
         </form>
       </div>
     </div>
