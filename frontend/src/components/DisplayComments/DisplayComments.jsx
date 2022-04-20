@@ -64,7 +64,7 @@ console.log(props.comments)
     return ( 
 
         <div className='main_container'>
-            {/* <PostReply modal={modal} comment={commentId} onClose={()=>setModal(false)}/> */}
+            <PostReply modal={modal} comment={commentId} onClose={()=>setModal(false)}/>
               <AddCommentModal comment={commentId} video={video}  comments={props.comments} setComments={props.setComments}/>
               
             

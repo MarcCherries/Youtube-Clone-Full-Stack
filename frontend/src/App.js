@@ -140,7 +140,7 @@ const [videoData, setVideoData] = useState(defaultData)
 async function handleSearch(event) {
 event.preventDefault()
   try {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchItem}&type=video&key=AIzaSyCWD4yq3V_9fOG5aC1W003_FWvbjPrKkW0&part=snippet`);
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchItem}&type=video&key=AIzaSyC7UvDmNEzMMgXrmu7n5gYLn_gwGeqDb8c&part=snippet`);
     setVideoData(response.data);
   } catch (error) {
     console.log(error.message);
