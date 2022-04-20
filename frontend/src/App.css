@@ -95,3 +95,8 @@ body {
   color: #1e6ab6;
   padding: 0 8px;
 }
+
+.flex-card{
+  display: flex;
+  flex-wrap: wrap;
+}

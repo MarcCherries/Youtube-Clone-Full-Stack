@@ -11,7 +11,7 @@ import VideoCard from "../../components/VideoCard/VideoCard";
 
 const VideoPage = (props) => {
   const [user, token] = useAuth();
-  const [comments, setComments] = useState()
+  const [comments, setComments] = useState();
 
   const { video } = useParams();
 
@@ -77,7 +77,8 @@ const VideoPage = (props) => {
     const fetchSim = async () => {
       try {
         let response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${video}&type=video&maxResults=10&key=AIzaSyCWD4yq3V_9fOG5aC1W003_FWvbjPrKkW0&part=snippet`
+          `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${video}&type=video&maxResults=10&key=AIzaSyC7UvDmNEzMMgXrmu7n5gYLn_gwGeqDb8c
+          &part=snippet`
         );
 
         console.log(response.data);
@@ -91,114 +92,25 @@ const VideoPage = (props) => {
 
   console.log(sim);
 
-
   return (
-    
-    <div className="video-page-container">
-     
-      <div className="video-comment-container">
+    <div className="video-comment-container">
+      <div>
         <iframe
           width="525"
           height="450"
           src={`https://www.youtube.com/embed/${video}`}
         ></iframe>
-        <DisplayComments video={video} comments={comments} setComments={setComments}/>
-     <VideoCard videoData={sim} />
-        
-  
-          
-      
+        <DisplayComments
+          video={video}
+          comments={comments}
+          setComments={setComments}
+        />
       </div>
-
-      <div className="thumbnail-container">
-      {/* <AddCommentModal video={video} comments={props.comments} setComments={props.setComments} />
-      <DisplayComments video={video} comments={props.comments} setComments={props.setComments} /> */}
-     
-      
-    
-      
-     
-        
-        {/* <Link to={`/VideoPage/${sim.items[4].id.videoId}`}>
-          <div className="thumbnail-card">
-          {sim.items[4].snippet &&
-            <img
-              className="thumbnail" sta
-              alt="thumbnail failed to load"
-              src={`${sim.items[4].snippet.thumbnails.default.url}`}
-            ></img>}
-                 {!sim.items[4].snippet &&
-              <img
-              className="thumbnail"
-              width="75"
-              height="50"
-              alt="thumbnail failed to load"
-              src='https://i.ytimg.com/vi/eVTXPUF4Oz4/default.jpg'
-              ></img>}
-          </div>
-        </Link>
-        <Link to={`/VideoPage/${sim.items[5].id.videoId}`}>
-          <div className="thumbnail-card">
-          {sim.items[5].snippet &&
-            <img
-              className="thumbnail"
-              width="75"
-              height="50"
-              alt="thumbnail failed to load"
-              src={`${sim.items[5].snippet.thumbnails.default.url}`}
-            ></img>}
-                 {!sim.items[5].snippet &&
-              <img
-              className="thumbnail"
-              width="75"
-              height="50"
-              alt="thumbnail failed to load"
-              src='https://i.ytimg.com/vi/eVTXPUF4Oz4/default.jpg'
-              ></img>}
-          </div>
-        </Link>
-
-       */}
+      <div>
+        <VideoCard videoData={sim} />
       </div>
     </div>
   );
 };
 
 export default VideoPage;
-
-//const fixSim = ()=>{
-
-//     let newResponseData = sim.items.filter(function(el){
-//       if (el.snippet){
-//           return true
-//       }
-
-//     }
-
-//     )
-//     console.log(newResponseData)
-//     setSim(newResponseData)
-//   }
-
-// useEffect(() => {
-//     const fetchComments = async () => {
-//         try {
-//           let response = await axios.get(`http://127.0.0.1:8000/api/comments/all/?video_id=${video}`, {
-//             headers: {
-//               Authorization: "Bearer " + token,
-//             },
-
-//           });
-//           console.log(response.data)
-
-//           setComments(response.data);
-
-//         } catch (error) {
-//           console.log(error.message);
-//         }
-
-//       };
-//       fetchComments();
-//     }, [token, video]
-
-//     )
