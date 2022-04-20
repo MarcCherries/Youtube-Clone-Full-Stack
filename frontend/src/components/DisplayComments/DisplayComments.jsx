@@ -3,44 +3,85 @@ import AddCommentModal from '../AddComentModal/AddCommentModal';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth"
 import './DisplayComments.css'
+import PostReply from '../PostReply/PostReply';
+import DisplayReplies from '../DisplayReplies/DisplayReplies';
 
 
 const DisplayComments = (props) => {
     
-    const [comments, setComments] = useState()
+   
     const video = props.video
     const [user, token] = useAuth()
+    const [modal, setModal] = useState(false)
+    const [commentId, setCommentId] = useState()
+
+    
+
+function handleReply(event){
+    let commentId = event.target.value;
+    setModal(true);
+    setCommentId(commentId)
+}
+
    
-// useEffect(()=> {
-//  const fetchComments = async () =>{
-//     try {
-//         let response = axios.get('http://127.0.0.1:8000/api/comments/all/', {
-//             headers: {
-//                 Authorization: "Bearer " + token
-//             }
-//         }
-//         )   
-//         setComments(response.data)
-//         console.log(response.data)
-//         console.log(comments)
+useEffect(()=> {
+ const fetchComments = async () =>{
+    try {
+        let response = await axios.get(`http://127.0.0.1:8000/api/comments/all/?video_id=${video}`, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        }
+        )   
+       
+        console.log(response.data)
+        props.setComments(response.data)
 
-//     } catch (error) {
         
-//     }
+       
+       
 
-// }
+    } catch (error) {
+        console.log(error.message)
+        
+    }
+    
+   
 
-// fetchComments()
-// },[comments]
-// )
+}
+
+fetchComments()
+
+},[token]
+)
+
+
+
+console.log(props.comments)
+
 
 
     return ( 
 
-        <div>
-                
-                <AddCommentModal modal={props.modal} onClose={props.onClose} video={video} />
-            <h6>Comments:</h6>
+        <div className='main_container'>
+            {/* <PostReply modal={modal} comment={commentId} onClose={()=>setModal(false)}/> */}
+              <AddCommentModal comment={commentId} video={video}  comments={props.comments} setComments={props.setComments}/>
+              
+            
+      
+           
+            {props.comments && props.comments.map((comment, index) =>{
+                return(
+                    <div className='single-comment'>
+                        <h5 className='user-comment'>{user.username}:</h5>
+             <p className='comment-text'key={index} > {comment.text}</p>
+             <button type='submit' value={comment.id} onClick={handleReply}>Reply</button>
+            
+         
+
+            </div>
+            )})}
+           
           
         </div>
      );

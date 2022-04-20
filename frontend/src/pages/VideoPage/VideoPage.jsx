@@ -7,12 +7,14 @@ import AddCommentModal from "../../components/AddComentModal/AddCommentModal";
 import DisplayComments from "../../components/DisplayComments/DisplayComments";
 import "./VideoPage.css";
 import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
+import VideoCard from "../../components/VideoCard/VideoCard";
 
 const VideoPage = (props) => {
   const [user, token] = useAuth();
+  const [comments, setComments] = useState()
 
   const { video } = useParams();
-  const [modal, setModal] = useState(false);
+
   const [sim, setSim] = useState({
     items: [
       {
@@ -88,35 +90,40 @@ const VideoPage = (props) => {
   }, [video]);
 
   console.log(sim);
-  console.log(modal);
+
 
   return (
+    
     <div className="video-page-container">
+     
       <div className="video-comment-container">
         <iframe
           width="525"
           height="450"
           src={`https://www.youtube.com/embed/${video}`}
         ></iframe>
+        <DisplayComments video={video} comments={comments} setComments={setComments}/>
+     <VideoCard videoData={sim} />
+        
+  
+          
+      
       </div>
 
       <div className="thumbnail-container">
-        <DisplayThumbnails videoData={sim} />
-        <DisplayComments
-          video={video}
-          modal={modal}
-          onClose={() => setModal(false)}
-        />
-
-        <button onClick={() => setModal(true)}>Reply</button>
-
+      {/* <AddCommentModal video={video} comments={props.comments} setComments={props.setComments} />
+      <DisplayComments video={video} comments={props.comments} setComments={props.setComments} /> */}
+     
+      
+    
+      
+     
+        
         {/* <Link to={`/VideoPage/${sim.items[4].id.videoId}`}>
           <div className="thumbnail-card">
           {sim.items[4].snippet &&
             <img
-              className="thumbnail"
-              width="75"
-              height="50"
+              className="thumbnail" sta
               alt="thumbnail failed to load"
               src={`${sim.items[4].snippet.thumbnails.default.url}`}
             ></img>}

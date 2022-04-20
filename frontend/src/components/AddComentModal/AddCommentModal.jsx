@@ -21,7 +21,6 @@ const AddCommentModal = (props) => {
     postNewComment
   );
 
-  console.log(props.modal);
   formData.video_id = props.video;
 
   async function postNewComment() {
@@ -40,12 +39,7 @@ const AddCommentModal = (props) => {
       console.log(error.message);
     }
   }
-  console.log(props.modal);
-  if (!props.modal) {
-    return null;
-  }
 
-  console.log(props.modal);
 
   return (
     <div className="modal">
@@ -61,7 +55,7 @@ const AddCommentModal = (props) => {
           ></input>
           <button type="submit">Submit</button>
 
-          <span className="close" onClick={props.onClose}>
+          <span className="close" >
             &times;
           </span>
         </form>

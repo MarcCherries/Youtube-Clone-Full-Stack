@@ -8,7 +8,7 @@ import VideoCard from "../../components/VideoCard/VideoCard";
 import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
 import VideoPage from "../VideoPage/VideoPage";
 
-const HomePage = () => {
+const HomePage = (props) => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
   // The "token" value is the JWT token that you will send in the header of any request requiring authentication
 
@@ -125,45 +125,39 @@ const HomePage = () => {
     ],
 })
 const [user, token] = useAuth();
-const [searchItem, setSearchItem] = useState()
 const [videoData, setVideoData] = useState(defaultData)
-  
-  async function handleSubmit(event) {
-    event.preventDefault()
-    try {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchItem}&type=video&key=AIzaSyCWD4yq3V_9fOG5aC1W003_FWvbjPrKkW0&part=snippet`);
-      setVideoData(response.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+const [searchItem, setSearchItem] = useState()
 
-console.log(defaultData)
-console.log(videoData)
+
+
+  
+
 
   return (
-<div>
+
     
 
 
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-      <form className="searchForm" onSubmit={handleSubmit}>
-        <input type="text" name="search" value={searchItem} onChange={(event)=>setSearchItem(event.target.value) }>
+      <form className="searchForm" onSubmit={props.handleSearch}>
+        <input type="text" name="search"  onChange={(event)=>props.setSearchItem(event.target.value) }>
         
         </input>
-        <button>
+        <button type='submit'>
 SEARCH
-        </button>
+        </button >
       </form>
-      <div >
-        <VideoCard videoData={videoData} defaultData={defaultData}/>
+      
+    <div>
+    <VideoCard handleSearch={props.handleSearch} setSearchItem={props.setSearchItem} videoData={props.videoData} defaultData={props.defaultData}/>
+        
+   
+      
+     
       </div>
-      
-      {/* <DisplayThumbnails videoData={videoData} defaultData={defaultData}/> */}
-      
     </div>
-    </div>
+   
   );
 };
 
