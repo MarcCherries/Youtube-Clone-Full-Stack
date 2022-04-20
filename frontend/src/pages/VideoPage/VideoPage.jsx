@@ -109,7 +109,7 @@ const VideoPage = (props) => {
       </div>
 
       <div className="thumbnail-container">
-      <AddCommentModal video={video} />
+      <AddCommentModal video={video} comments={comments} setComments={setComments} />
       <DisplayComments video={video} comments={comments} setComments={setComments}/>
 
       
@@ -121,9 +121,7 @@ const VideoPage = (props) => {
           <div className="thumbnail-card">
           {sim.items[4].snippet &&
             <img
-              className="thumbnail"
-              width="75"
-              height="50"
+              className="thumbnail" sta
               alt="thumbnail failed to load"
               src={`${sim.items[4].snippet.thumbnails.default.url}`}
             ></img>}
