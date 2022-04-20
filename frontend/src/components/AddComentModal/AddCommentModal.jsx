@@ -14,21 +14,16 @@ let initialValues = {
 const AddCommentModal = (props) => {
   //   const [comments, setComments] = useState([]);
   const [user, token] = useAuth();
-  
-
+  const [comments, setComments] = useState();
 
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     initialValues,
     postNewComment
   );
 
-  console.log(props.modal);
   formData.video_id = props.video;
-  
-  async function postNewComment(formData) {
- 
 
-    
+  async function postNewComment() {
     try {
       let response = await axios.post(
         "http://127.0.0.1:8000/api/comments/",
@@ -38,50 +33,31 @@ const AddCommentModal = (props) => {
             Authorization: "Bearer " + token,
           },
         }
-        
       );
-      props.setComments(response.data)
-     
-     
-    
-    
-     
-
+      setComments(response.data);
     } catch (error) {
       console.log(error.message);
     }
-  
   }
- 
- 
-
-
 
 
   return (
     <div className="modal">
       <div className="modal-window">
         <form className="form" onSubmit={handleSubmit}>
-          <label className="comment-label">COMMENT </label>
+          <label>COMMENT </label>
 
           <input
-            className="comment-input"
             type="text"
             name="text"
             value={formData.text}
             onChange={handleInputChange}
           ></input>
-          <button 
-          type="submit"
-          className="comment-button"
-         
-          >
-            Comment
-          </button>
+          <button type="submit">Submit</button>
 
-         
-        
-         
+          <span className="close" >
+            &times;
+          </span>
         </form>
       </div>
     </div>

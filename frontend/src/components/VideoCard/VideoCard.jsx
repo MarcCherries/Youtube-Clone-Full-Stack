@@ -4,7 +4,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const VideoCard = (props) => {
-  console.log(props.videoData);
+  console.log(props.videoData)
+  
 
   return (
     <div>
@@ -13,11 +14,12 @@ const VideoCard = (props) => {
           <div
             className="card"
             style={{ width: "30%", border: "2px solid black" }}
-          >
-            <Link key={index} to={`/VideoPage/${entry.id.videoId}`}>
+          >{entry.snippet &&
+            <Link  to={`/VideoPage/${entry.id.videoId}`}>
               <img src={entry.snippet.thumbnails.default.url} />
-            </Link>
-            <div>{entry.snippet.title}</div>
+            </Link>}
+            {entry.snippet &&
+            <div>{entry.snippet.title}</div>}
           </div>
         );
       })}

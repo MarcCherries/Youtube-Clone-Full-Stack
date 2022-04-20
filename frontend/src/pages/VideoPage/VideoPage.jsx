@@ -7,6 +7,7 @@ import AddCommentModal from "../../components/AddComentModal/AddCommentModal";
 import DisplayComments from "../../components/DisplayComments/DisplayComments";
 import "./VideoPage.css";
 import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbnails";
+import VideoCard from "../../components/VideoCard/VideoCard";
 
 const VideoPage = (props) => {
   const [user, token] = useAuth();
@@ -94,14 +95,15 @@ const VideoPage = (props) => {
   return (
     
     <div className="video-page-container">
-      
+     
       <div className="video-comment-container">
         <iframe
           width="525"
           height="450"
           src={`https://www.youtube.com/embed/${video}`}
         ></iframe>
-     
+        <DisplayComments video={video} comments={comments} setComments={setComments}/>
+     <VideoCard videoData={sim} />
         
   
           
@@ -109,9 +111,9 @@ const VideoPage = (props) => {
       </div>
 
       <div className="thumbnail-container">
-      <AddCommentModal video={video} comments={comments} setComments={setComments} />
-      <DisplayComments video={video} comments={comments} setComments={setComments}/>
-
+      {/* <AddCommentModal video={video} comments={props.comments} setComments={props.setComments} />
+      <DisplayComments video={video} comments={props.comments} setComments={props.setComments} /> */}
+     
       
     
       
