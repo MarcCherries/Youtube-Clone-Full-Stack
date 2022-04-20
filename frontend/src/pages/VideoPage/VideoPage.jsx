@@ -10,9 +10,10 @@ import DisplayThumbnails from "../../components/DisplayThumbnails/DisplayThumbna
 
 const VideoPage = (props) => {
   const [user, token] = useAuth();
+  const [comments, setComments] = useState()
 
   const { video } = useParams();
-  const [modal, setModal] = useState(false);
+
   const [sim, setSim] = useState({
     items: [
       {
@@ -88,28 +89,34 @@ const VideoPage = (props) => {
   }, [video]);
 
   console.log(sim);
-  console.log(modal)
+
 
   return (
+    
     <div className="video-page-container">
+      
       <div className="video-comment-container">
         <iframe
           width="525"
           height="450"
           src={`https://www.youtube.com/embed/${video}`}
         ></iframe>
+     
+        
+  
+          
       
       </div>
 
       <div className="thumbnail-container">
-<<<<<<< HEAD
-        <DisplayThumbnails videoData={sim} />
-=======
-      <DisplayComments video={video} modal={modal} onClose={() =>setModal(false)}/>
+      <AddCommentModal video={video} />
+      <DisplayComments video={video} comments={comments} setComments={setComments}/>
+
       
-      <button  onClick={() => setModal(true)}>Reply</button>
+    
+      
+     
         
->>>>>>> e69fbb26b42e823f9a406f6882730a9b516b0af0
         {/* <Link to={`/VideoPage/${sim.items[4].id.videoId}`}>
           <div className="thumbnail-card">
           {sim.items[4].snippet &&

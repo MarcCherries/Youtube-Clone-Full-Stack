@@ -14,7 +14,8 @@ let initialValues = {
 const AddCommentModal = (props) => {
   //   const [comments, setComments] = useState([]);
   const [user, token] = useAuth();
-  const [comments, setComments] = useState();
+  
+
 
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     initialValues,
@@ -23,8 +24,11 @@ const AddCommentModal = (props) => {
 
   console.log(props.modal);
   formData.video_id = props.video;
+  
+  async function postNewComment(formData) {
+ 
 
-  async function postNewComment() {
+    
     try {
       let response = await axios.post(
         "http://127.0.0.1:8000/api/comments/",
@@ -34,38 +38,50 @@ const AddCommentModal = (props) => {
             Authorization: "Bearer " + token,
           },
         }
+        
       );
-      setComments(response.data);
+      props.setComments(response.data)
+     
+     
+    
+    
+     
+
     } catch (error) {
       console.log(error.message);
     }
+  
   }
-  console.log(props.modal);
-  if (!props.modal) {
-    return null;
-  }
+ 
+ 
 
-  console.log(props.modal);
+
+
 
   return (
     <div className="modal">
       <div className="modal-window">
         <form className="form" onSubmit={handleSubmit}>
-          <label>COMMENT </label>
+          <label className="comment-label">COMMENT </label>
 
           <input
+            className="comment-input"
             type="text"
             name="text"
             value={formData.text}
             onChange={handleInputChange}
           ></input>
-          <button type="submit" onClick={props.onClose}>
-            Submit
+          <button 
+          type="submit"
+          className="comment-button"
+         
+          >
+            Comment
           </button>
 
-          <span className="close" onClick={props.onClose}>
-            &times;
-          </span>
+         
+        
+         
         </form>
       </div>
     </div>

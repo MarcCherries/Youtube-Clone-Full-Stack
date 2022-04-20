@@ -142,7 +142,7 @@ console.log(defaultData)
 console.log(videoData)
 
   return (
-<div>
+
     
 
 
@@ -156,14 +156,14 @@ console.log(videoData)
 SEARCH
         </button>
       </form>
-      <div >
-        <VideoCard videoData={videoData} defaultData={defaultData}/>
+    <div>
+        
+    <VideoCard videoData={videoData} defaultData={defaultData} />
+      
+     
       </div>
-      
-      {/* <DisplayThumbnails videoData={videoData} defaultData={defaultData}/> */}
-      
     </div>
-    </div>
+   
   );
 };
 
