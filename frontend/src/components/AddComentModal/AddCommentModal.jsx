@@ -59,9 +59,7 @@ const AddCommentModal = (props) => {
             value={formData.text}
             onChange={handleInputChange}
           ></input>
-          <button type="submit" onClick={props.onClose}>
-            Submit
-          </button>
+          <button type="submit">Submit</button>
 
           <span className="close" onClick={props.onClose}>
             &times;
