@@ -38,7 +38,8 @@ button:hover {
   max-width: 600px;
   overflow: auto;
   text-align: center;
-  color:rgb(247, 62, 62);
+  color:rgb(250, 248, 248);
+  
   
 }
 
@@ -100,6 +101,8 @@ body {
 }
 
 .flex-card{
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
+  gap: 15px;
+  margin-left: 50px;
 }
