@@ -17,7 +17,7 @@ const PostReply = (props) => {
     if (!props.modal){
         return null
         }
-        console.log(props.modal)
+       
     
 
     async function postNewReply() {

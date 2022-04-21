@@ -1,0 +1,10 @@
+.reply-heading {
+
+}
+
+.reply-container {
+    height: 5rem;
+    border: 2px solid black;
+    padding: 1rem;
+    margin-top: 1rem;
+}

@@ -6,55 +6,45 @@ import "./DisplayComments.css";
 import PostReply from "../PostReply/PostReply";
 import DisplayReplies from "../DisplayReplies/DisplayReplies";
 import LikeAndDislike from "../LikeAndDislike/LikeAndDislike";
+import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const DisplayComments = (props) => {
-  const video = props.video;
+ 
   const [user, token] = useAuth();
   const [modal, setModal] = useState(false);
   const [commentId, setCommentId] = useState();
 
+ 
+   
+
+  
+
   function handleReply(event) {
-    let commentId = event.target.value;
+  event.preventDefault();
+    let newComment = event.target.value;
     setModal(true);
-    setCommentId(commentId);
+    setCommentId(newComment);
   }
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        let response = await axios.get(
-          `http://127.0.0.1:8000/api/comments/all/?video_id=${video}`,
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
-
-        console.log(response.data);
-        props.setComments(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    fetchComments();
-  }, [token]);
-
-  console.log(props.comments);
+ 
+  console.log(props.comments)
+  console.log(modal);
 
   return (
     <div className="main_container">
-      {/* <PostReply modal={modal} comment={commentId} onClose={()=>setModal(false)}/> */}
+      <PostReply modal={modal} comment={commentId} onClose={()=>setModal(false)}/>
       <AddCommentModal
         comment={commentId}
-        video={video}
+        video={props.video}
         comments={props.comments}
         setComments={props.setComments}
       />
 
       {props.comments &&
         props.comments.map((comment, index) => {
+         
           return (
             <div className="single-comment">
               <h5 className="user-comment">{user.username}:</h5>
@@ -62,9 +52,15 @@ const DisplayComments = (props) => {
                 {" "}
                 {comment.text}
               </p>
-              <button type="submit" value={comment.id} onClick={handleReply}>
+              <button type="submit" onClick={handleReply} value={comment.id}>
                 Reply
               </button>
+             <Link to={(`/CommentPage/${comment.id}`)}>
+              <button type="submit" value={comment.id} >
+                See Replies
+              </button>
+              </Link>
+             
               <LikeAndDislike />
             </div>
           );
