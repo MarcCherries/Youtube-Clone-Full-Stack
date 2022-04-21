@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import './DisplayReplies.css'
  
 
 const DisplayReplies = (props) => {
@@ -15,7 +16,7 @@ const DisplayReplies = (props) => {
         
             
         
-        let response = await axios.get(`http://127.0.0.1:8000/api/comments/replies/all/`, {
+        let response = await axios.get(`http://127.0.0.1:8000/api/comments/${props.commentId}/`, {
             headers: {
                 Authorization: "Bearer " + token
             }
@@ -38,7 +39,21 @@ const DisplayReplies = (props) => {
 
     return ( 
         <div>
-
+          <div>
+     
+     {replies &&
+       replies.map((reply) => (
+         <p key={reply.id}>
+              <h3 className='reply-heading'>REPLIES:</h3>
+             <div className='reply-container'>
+            
+             <p className='reply-text'>
+           {reply.text}
+           </p>
+           </div>
+         </p>
+       ))}
+   </div>
         </div>
      );
 }

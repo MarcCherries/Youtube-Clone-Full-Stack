@@ -153,7 +153,7 @@ SEARCH
     <div>
     <VideoCard handleSearch={props.handleSearch} setSearchItem={props.setSearchItem} videoData={props.videoData} defaultData={props.defaultData}/>
         
-   <DisplayReplies />
+
       
      
       </div>

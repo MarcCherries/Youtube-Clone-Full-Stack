@@ -14,7 +14,7 @@ const VideoCard = (props) => {
             style={{ width: "30%", border: "2px solid black" }}
           >
             {entry.snippet && (
-              <Link to={`/VideoPage/${entry.id.videoId}`}>
+              <Link onClick={props.fetchSim}to={`/VideoPage/${entry.id.videoId}`}>
                 <img src={entry.snippet.thumbnails.default.url} />
               </Link>
             )}
